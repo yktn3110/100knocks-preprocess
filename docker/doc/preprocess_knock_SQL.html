@@ -7590,7 +7590,8 @@ a.anchor-link {
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>Deploy Shiny apps for free on Ploomber Cloud! Learn more: https://ploomber.io/s/signup
+<pre>There's a new jupysql version available (0.11.1), you're running 0.7.2. To upgrade: pip install jupysql --upgrade
+Deploy FastAPI apps for free on Ploomber Cloud! Learn more: https://ploomber.io/s/signup
 </pre>
 </div>
 </div>
@@ -10830,20 +10831,102 @@ a.anchor-link {
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [8]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
 <span class="k">SELECT</span>
 <span class="n">customer_id</span><span class="p">,</span>
 <span class="n">amount</span><span class="p">,</span>
-<span class="n">RANK</span><span class="w"> </span><span class="n">OVER</span><span class="p">(</span><span class="k">ORDER</span><span class="p">)</span>
+<span class="n">RANK</span><span class="p">()</span><span class="w"> </span><span class="n">OVER</span><span class="p">(</span><span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">amount</span><span class="w"> </span><span class="k">desc</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">ranking</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">receipt</span>
+<span class="k">LIMIT</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span>
 </pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>*  postgresql://padawan:***@db:5432/dsdojo_db
+10 rows affected.
+</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[8]:</div>
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
+<table>
+<thead>
+<tr>
+<th>customer_id</th>
+<th>amount</th>
+<th>ranking</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CS011415000006</td>
+<td>10925</td>
+<td>1</td>
+</tr>
+<tr>
+<td>ZZ000000000000</td>
+<td>6800</td>
+<td>2</td>
+</tr>
+<tr>
+<td>CS028605000002</td>
+<td>5780</td>
+<td>3</td>
+</tr>
+<tr>
+<td>CS015515000034</td>
+<td>5480</td>
+<td>4</td>
+</tr>
+<tr>
+<td>ZZ000000000000</td>
+<td>5480</td>
+<td>4</td>
+</tr>
+<tr>
+<td>ZZ000000000000</td>
+<td>5480</td>
+<td>4</td>
+</tr>
+<tr>
+<td>ZZ000000000000</td>
+<td>5440</td>
+<td>7</td>
+</tr>
+<tr>
+<td>CS021515000089</td>
+<td>5440</td>
+<td>7</td>
+</tr>
+<tr>
+<td>CS001412000160</td>
+<td>5280</td>
+<td>9</td>
+</tr>
+<tr>
+<td>CS020414000081</td>
+<td>5280</td>
+<td>9</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 </div>
@@ -10862,16 +10945,102 @@ a.anchor-link {
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [7]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+<span class="k">SELECT</span>
+<span class="n">customer_id</span><span class="p">,</span>
+<span class="n">amount</span><span class="p">,</span>
+<span class="n">ROW_NUMBER</span><span class="p">()</span><span class="w"> </span><span class="n">OVER</span><span class="p">(</span><span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">amount</span><span class="w"> </span><span class="k">desc</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">ranking</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">receipt</span>
+<span class="k">LIMIT</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span>
 </pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>*  postgresql://padawan:***@db:5432/dsdojo_db
+10 rows affected.
+</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[7]:</div>
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
+<table>
+<thead>
+<tr>
+<th>customer_id</th>
+<th>amount</th>
+<th>ranking</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CS011415000006</td>
+<td>10925</td>
+<td>1</td>
+</tr>
+<tr>
+<td>ZZ000000000000</td>
+<td>6800</td>
+<td>2</td>
+</tr>
+<tr>
+<td>CS028605000002</td>
+<td>5780</td>
+<td>3</td>
+</tr>
+<tr>
+<td>CS015515000034</td>
+<td>5480</td>
+<td>4</td>
+</tr>
+<tr>
+<td>ZZ000000000000</td>
+<td>5480</td>
+<td>5</td>
+</tr>
+<tr>
+<td>ZZ000000000000</td>
+<td>5480</td>
+<td>6</td>
+</tr>
+<tr>
+<td>ZZ000000000000</td>
+<td>5440</td>
+<td>7</td>
+</tr>
+<tr>
+<td>CS021515000089</td>
+<td>5440</td>
+<td>8</td>
+</tr>
+<tr>
+<td>CS020414000081</td>
+<td>5280</td>
+<td>9</td>
+</tr>
+<tr>
+<td>CS001412000160</td>
+<td>5280</td>
+<td>10</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 </div>
@@ -10890,16 +11059,51 @@ a.anchor-link {
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [8]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+<span class="k">SELECT</span>
+<span class="k">count</span><span class="p">(</span><span class="o">*</span><span class="p">)</span>
+<span class="k">FROM</span>
+<span class="n">receipt</span><span class="p">;</span>
 </pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>*  postgresql://padawan:***@db:5432/dsdojo_db
+1 rows affected.
+</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[8]:</div>
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
+<table>
+<thead>
+<tr>
+<th>count</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>104681</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 </div>
@@ -10918,16 +11122,51 @@ a.anchor-link {
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [14]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+<span class="k">SELECT</span>
+<span class="k">count</span><span class="p">(</span><span class="k">DISTINCT</span><span class="w"> </span><span class="n">customer_id</span><span class="p">)</span>
+<span class="k">FROM</span>
+<span class="n">receipt</span><span class="p">;</span>
 </pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>*  postgresql://padawan:***@db:5432/dsdojo_db
+1 rows affected.
+</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[14]:</div>
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
+<table>
+<thead>
+<tr>
+<th>count</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>8307</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 </div>
@@ -10946,16 +11185,313 @@ a.anchor-link {
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [16]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+<span class="k">SELECT</span>
+<span class="n">store_cd</span><span class="p">,</span>
+<span class="k">sum</span><span class="p">(</span><span class="n">amount</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">amount_sum</span><span class="p">,</span>
+<span class="k">sum</span><span class="p">(</span><span class="n">quantity</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">qty_sum</span>
+<span class="k">FROM</span>
+<span class="n">receipt</span>
+<span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">store_cd</span><span class="p">;</span>
 </pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>*  postgresql://padawan:***@db:5432/dsdojo_db
+52 rows affected.
+</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[16]:</div>
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
+<table>
+<thead>
+<tr>
+<th>store_cd</th>
+<th>amount_sum</th>
+<th>qty_sum</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>S12007</td>
+<td>638761</td>
+<td>2099</td>
+</tr>
+<tr>
+<td>S13017</td>
+<td>748221</td>
+<td>2376</td>
+</tr>
+<tr>
+<td>S13043</td>
+<td>587895</td>
+<td>1881</td>
+</tr>
+<tr>
+<td>S13052</td>
+<td>100314</td>
+<td>250</td>
+</tr>
+<tr>
+<td>S13016</td>
+<td>793773</td>
+<td>2432</td>
+</tr>
+<tr>
+<td>S14027</td>
+<td>714550</td>
+<td>2303</td>
+</tr>
+<tr>
+<td>S13009</td>
+<td>808870</td>
+<td>2486</td>
+</tr>
+<tr>
+<td>S14022</td>
+<td>651328</td>
+<td>2047</td>
+</tr>
+<tr>
+<td>S13019</td>
+<td>827833</td>
+<td>2541</td>
+</tr>
+<tr>
+<td>S13039</td>
+<td>611888</td>
+<td>1981</td>
+</tr>
+<tr>
+<td>S14046</td>
+<td>412646</td>
+<td>1354</td>
+</tr>
+<tr>
+<td>S13003</td>
+<td>764294</td>
+<td>2197</td>
+</tr>
+<tr>
+<td>S14028</td>
+<td>786145</td>
+<td>2458</td>
+</tr>
+<tr>
+<td>S14045</td>
+<td>458484</td>
+<td>1398</td>
+</tr>
+<tr>
+<td>S13002</td>
+<td>727821</td>
+<td>2340</td>
+</tr>
+<tr>
+<td>S14042</td>
+<td>534689</td>
+<td>1935</td>
+</tr>
+<tr>
+<td>S13004</td>
+<td>779373</td>
+<td>2390</td>
+</tr>
+<tr>
+<td>S13038</td>
+<td>708884</td>
+<td>2337</td>
+</tr>
+<tr>
+<td>S12014</td>
+<td>725167</td>
+<td>2358</td>
+</tr>
+<tr>
+<td>S14021</td>
+<td>699511</td>
+<td>2231</td>
+</tr>
+<tr>
+<td>S14006</td>
+<td>712839</td>
+<td>2284</td>
+</tr>
+<tr>
+<td>S13001</td>
+<td>811936</td>
+<td>2347</td>
+</tr>
+<tr>
+<td>S14023</td>
+<td>727630</td>
+<td>2258</td>
+</tr>
+<tr>
+<td>S14025</td>
+<td>755581</td>
+<td>2394</td>
+</tr>
+<tr>
+<td>S13035</td>
+<td>715869</td>
+<td>2219</td>
+</tr>
+<tr>
+<td>S14048</td>
+<td>234276</td>
+<td>769</td>
+</tr>
+<tr>
+<td>S14012</td>
+<td>720600</td>
+<td>2412</td>
+</tr>
+<tr>
+<td>S14024</td>
+<td>736323</td>
+<td>2417</td>
+</tr>
+<tr>
+<td>S13041</td>
+<td>728266</td>
+<td>2233</td>
+</tr>
+<tr>
+<td>S14026</td>
+<td>824537</td>
+<td>2503</td>
+</tr>
+<tr>
+<td>S14010</td>
+<td>790361</td>
+<td>2290</td>
+</tr>
+<tr>
+<td>S13015</td>
+<td>780873</td>
+<td>2248</td>
+</tr>
+<tr>
+<td>S13008</td>
+<td>809288</td>
+<td>2491</td>
+</tr>
+<tr>
+<td>S14049</td>
+<td>230808</td>
+<td>788</td>
+</tr>
+<tr>
+<td>S14050</td>
+<td>167090</td>
+<td>580</td>
+</tr>
+<tr>
+<td>S13031</td>
+<td>705968</td>
+<td>2336</td>
+</tr>
+<tr>
+<td>S12013</td>
+<td>787513</td>
+<td>2425</td>
+</tr>
+<tr>
+<td>S13044</td>
+<td>520764</td>
+<td>1729</td>
+</tr>
+<tr>
+<td>S14033</td>
+<td>725318</td>
+<td>2282</td>
+</tr>
+<tr>
+<td>S12029</td>
+<td>794741</td>
+<td>2555</td>
+</tr>
+<tr>
+<td>S13037</td>
+<td>693087</td>
+<td>2344</td>
+</tr>
+<tr>
+<td>S12030</td>
+<td>684402</td>
+<td>2403</td>
+</tr>
+<tr>
+<td>S13032</td>
+<td>790501</td>
+<td>2491</td>
+</tr>
+<tr>
+<td>S14034</td>
+<td>653681</td>
+<td>2024</td>
+</tr>
+<tr>
+<td>S14040</td>
+<td>701858</td>
+<td>2233</td>
+</tr>
+<tr>
+<td>S13005</td>
+<td>629876</td>
+<td>2004</td>
+</tr>
+<tr>
+<td>S14047</td>
+<td>338329</td>
+<td>1041</td>
+</tr>
+<tr>
+<td>S14011</td>
+<td>805724</td>
+<td>2434</td>
+</tr>
+<tr>
+<td>S13018</td>
+<td>790535</td>
+<td>2562</td>
+</tr>
+<tr>
+<td>S13020</td>
+<td>796383</td>
+<td>2383</td>
+</tr>
+<tr>
+<td>S13051</td>
+<td>107452</td>
+<td>354</td>
+</tr>
+<tr>
+<td>S14036</td>
+<td>203694</td>
+<td>635</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 </div>
@@ -10974,16 +11510,91 @@ a.anchor-link {
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [21]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+<span class="k">SELECT</span>
+<span class="n">customer_id</span><span class="p">,</span>
+<span class="k">MAX</span><span class="p">(</span><span class="n">sales_ymd</span><span class="p">)</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">receipt</span>
+<span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">customer_id</span>
+<span class="k">LIMIT</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span>
 </pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>*  postgresql://padawan:***@db:5432/dsdojo_db
+10 rows affected.
+</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[21]:</div>
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
+<table>
+<thead>
+<tr>
+<th>customer_id</th>
+<th>max</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CS001311000059</td>
+<td>20180211</td>
+</tr>
+<tr>
+<td>CS004614000122</td>
+<td>20181228</td>
+</tr>
+<tr>
+<td>CS003512000043</td>
+<td>20180106</td>
+</tr>
+<tr>
+<td>CS011615000061</td>
+<td>20190503</td>
+</tr>
+<tr>
+<td>CS029212000033</td>
+<td>20180621</td>
+</tr>
+<tr>
+<td>CS007515000119</td>
+<td>20190511</td>
+</tr>
+<tr>
+<td>CS034515000123</td>
+<td>20190708</td>
+</tr>
+<tr>
+<td>CS004315000058</td>
+<td>20170517</td>
+</tr>
+<tr>
+<td>CS026414000014</td>
+<td>20190720</td>
+</tr>
+<tr>
+<td>CS001615000099</td>
+<td>20170729</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 </div>
@@ -11002,16 +11613,91 @@ a.anchor-link {
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [22]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+<span class="k">SELECT</span>
+<span class="n">customer_id</span><span class="p">,</span>
+<span class="k">MAX</span><span class="p">(</span><span class="n">sales_ymd</span><span class="p">)</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">receipt</span>
+<span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">customer_id</span>
+<span class="k">LIMIT</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span>
 </pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>*  postgresql://padawan:***@db:5432/dsdojo_db
+10 rows affected.
+</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[22]:</div>
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
+<table>
+<thead>
+<tr>
+<th>customer_id</th>
+<th>max</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CS001311000059</td>
+<td>20180211</td>
+</tr>
+<tr>
+<td>CS004614000122</td>
+<td>20181228</td>
+</tr>
+<tr>
+<td>CS003512000043</td>
+<td>20180106</td>
+</tr>
+<tr>
+<td>CS011615000061</td>
+<td>20190503</td>
+</tr>
+<tr>
+<td>CS029212000033</td>
+<td>20180621</td>
+</tr>
+<tr>
+<td>CS007515000119</td>
+<td>20190511</td>
+</tr>
+<tr>
+<td>CS034515000123</td>
+<td>20190708</td>
+</tr>
+<tr>
+<td>CS004315000058</td>
+<td>20170517</td>
+</tr>
+<tr>
+<td>CS026414000014</td>
+<td>20190720</td>
+</tr>
+<tr>
+<td>CS001615000099</td>
+<td>20170729</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 </div>
@@ -11030,16 +11716,104 @@ a.anchor-link {
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [26]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+<span class="k">SELECT</span>
+<span class="n">customer_id</span><span class="p">,</span>
+<span class="k">MAX</span><span class="p">(</span><span class="n">sales_ymd</span><span class="p">),</span>
+<span class="k">MIN</span><span class="p">(</span><span class="n">sales_ymd</span><span class="p">)</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">receipt</span>
+<span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">customer_id</span>
+<span class="k">HAVING</span><span class="w"> </span><span class="k">MAX</span><span class="p">(</span><span class="n">sales_ymd</span><span class="p">)</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="k">MIN</span><span class="p">(</span><span class="n">sales_ymd</span><span class="p">)</span>
+<span class="k">LIMIT</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span>
 </pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>*  postgresql://padawan:***@db:5432/dsdojo_db
+10 rows affected.
+</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[26]:</div>
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
+<table>
+<thead>
+<tr>
+<th>customer_id</th>
+<th>max</th>
+<th>min</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CS029212000033</td>
+<td>20180621</td>
+<td>20170318</td>
+</tr>
+<tr>
+<td>CS007515000119</td>
+<td>20190511</td>
+<td>20170201</td>
+</tr>
+<tr>
+<td>CS034515000123</td>
+<td>20190708</td>
+<td>20170527</td>
+</tr>
+<tr>
+<td>CS026414000014</td>
+<td>20190720</td>
+<td>20170718</td>
+</tr>
+<tr>
+<td>CS010515000082</td>
+<td>20181204</td>
+<td>20180518</td>
+</tr>
+<tr>
+<td>CS019315000045</td>
+<td>20170920</td>
+<td>20170423</td>
+</tr>
+<tr>
+<td>CS008513000099</td>
+<td>20190308</td>
+<td>20170722</td>
+</tr>
+<tr>
+<td>CS007615000070</td>
+<td>20191025</td>
+<td>20170929</td>
+</tr>
+<tr>
+<td>CS025415000155</td>
+<td>20191026</td>
+<td>20170314</td>
+</tr>
+<tr>
+<td>CS016414000063</td>
+<td>20190617</td>
+<td>20170109</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 </div>
@@ -11058,16 +11832,72 @@ a.anchor-link {
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [31]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+<span class="k">SELECT</span>
+<span class="n">store_cd</span><span class="p">,</span>
+<span class="k">avg</span><span class="p">(</span><span class="n">amount</span><span class="p">)</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">receipt</span>
+<span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">store_cd</span>
+<span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="k">avg</span><span class="p">(</span><span class="n">amount</span><span class="p">)</span><span class="w"> </span><span class="k">desc</span>
+<span class="k">LIMIT</span><span class="w"> </span><span class="mi">5</span>
 </pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>*  postgresql://padawan:***@db:5432/dsdojo_db
+5 rows affected.
+</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[31]:</div>
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
+<table>
+<thead>
+<tr>
+<th>store_cd</th>
+<th>avg</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>S13052</td>
+<td>402.8674698795180723</td>
+</tr>
+<tr>
+<td>S13015</td>
+<td>351.1119604316546763</td>
+</tr>
+<tr>
+<td>S13003</td>
+<td>350.9155188246097337</td>
+</tr>
+<tr>
+<td>S14010</td>
+<td>348.7912621359223301</td>
+</tr>
+<tr>
+<td>S13001</td>
+<td>348.4703862660944206</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 </div>
@@ -11086,16 +11916,73 @@ a.anchor-link {
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [39]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+<span class="k">SELECT</span>
+<span class="n">store_cd</span><span class="p">,</span>
+<span class="n">PERCENTILE_CONT</span><span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">5</span><span class="p">)</span><span class="w"> </span><span class="n">WITHIN</span><span class="w"> </span><span class="k">GROUP</span><span class="w"> </span><span class="p">(</span><span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">amount</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">median_amount</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">receipt</span>
+<span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">store_cd</span>
+<span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">median_amount</span><span class="w"> </span><span class="k">desc</span>
+<span class="k">LIMIT</span><span class="w"> </span><span class="mi">5</span>
+<span class="p">;</span>
 </pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>*  postgresql://padawan:***@db:5432/dsdojo_db
+5 rows affected.
+</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[39]:</div>
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
+<table>
+<thead>
+<tr>
+<th>store_cd</th>
+<th>median_amount</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>S13052</td>
+<td>190.0</td>
+</tr>
+<tr>
+<td>S14010</td>
+<td>188.0</td>
+</tr>
+<tr>
+<td>S14050</td>
+<td>185.0</td>
+</tr>
+<tr>
+<td>S13003</td>
+<td>180.0</td>
+</tr>
+<tr>
+<td>S13018</td>
+<td>180.0</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 </div>
@@ -11114,16 +12001,93 @@ a.anchor-link {
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [45]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+<span class="k">SELECT</span>
+<span class="n">store_cd</span><span class="p">,</span>
+<span class="k">MODE</span><span class="p">()</span><span class="w"> </span><span class="n">WITHIN</span><span class="w"> </span><span class="k">GROUP</span><span class="w"> </span><span class="p">(</span><span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">product_cd</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">median_pc</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">receipt</span>
+<span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">store_cd</span>
+<span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">store_cd</span>
+<span class="k">LIMIT</span><span class="w"> </span><span class="mi">10</span>
+<span class="p">;</span>
 </pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>*  postgresql://padawan:***@db:5432/dsdojo_db
+10 rows affected.
+</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[45]:</div>
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
+<table>
+<thead>
+<tr>
+<th>store_cd</th>
+<th>median_pc</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>S12007</td>
+<td>P060303001</td>
+</tr>
+<tr>
+<td>S12013</td>
+<td>P060303001</td>
+</tr>
+<tr>
+<td>S12014</td>
+<td>P060303001</td>
+</tr>
+<tr>
+<td>S12029</td>
+<td>P060303001</td>
+</tr>
+<tr>
+<td>S12030</td>
+<td>P060303001</td>
+</tr>
+<tr>
+<td>S13001</td>
+<td>P060303001</td>
+</tr>
+<tr>
+<td>S13002</td>
+<td>P060303001</td>
+</tr>
+<tr>
+<td>S13003</td>
+<td>P071401001</td>
+</tr>
+<tr>
+<td>S13004</td>
+<td>P060303001</td>
+</tr>
+<tr>
+<td>S13005</td>
+<td>P040503001</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 </div>
@@ -11142,16 +12106,92 @@ a.anchor-link {
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [49]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+<span class="k">SELECT</span>
+<span class="n">store_cd</span><span class="p">,</span>
+<span class="n">VAR_POP</span><span class="p">(</span><span class="n">amount</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">var_am</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">receipt</span>
+<span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">store_cd</span>
+<span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">var_am</span><span class="w"> </span><span class="k">desc</span>
+<span class="k">LIMIT</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span>
 </pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>*  postgresql://padawan:***@db:5432/dsdojo_db
+10 rows affected.
+</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[49]:</div>
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
+<table>
+<thead>
+<tr>
+<th>store_cd</th>
+<th>var_am</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>S13052</td>
+<td>440088.701311269173</td>
+</tr>
+<tr>
+<td>S14011</td>
+<td>306314.558163888889</td>
+</tr>
+<tr>
+<td>S14034</td>
+<td>296920.081011283873</td>
+</tr>
+<tr>
+<td>S13001</td>
+<td>295431.993329035348</td>
+</tr>
+<tr>
+<td>S13015</td>
+<td>295294.361115940880</td>
+</tr>
+<tr>
+<td>S13035</td>
+<td>277995.278909448585</td>
+</tr>
+<tr>
+<td>S14045</td>
+<td>266450.744883821821</td>
+</tr>
+<tr>
+<td>S14046</td>
+<td>264262.537936568054</td>
+</tr>
+<tr>
+<td>S14010</td>
+<td>258454.256075459087</td>
+</tr>
+<tr>
+<td>S14021</td>
+<td>254009.419689383866</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 </div>
@@ -11170,16 +12210,73 @@ a.anchor-link {
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [50]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+<span class="k">SELECT</span>
+<span class="n">store_cd</span><span class="p">,</span>
+<span class="n">STDDEV_POP</span><span class="p">(</span><span class="n">amount</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">std_am</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">receipt</span>
+<span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">store_cd</span>
+<span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">std_am</span><span class="w"> </span><span class="k">desc</span>
+<span class="k">LIMIT</span><span class="w"> </span><span class="mi">5</span>
+<span class="p">;</span>
 </pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>*  postgresql://padawan:***@db:5432/dsdojo_db
+5 rows affected.
+</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[50]:</div>
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
+<table>
+<thead>
+<tr>
+<th>store_cd</th>
+<th>std_am</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>S13052</td>
+<td>663.391815830787</td>
+</tr>
+<tr>
+<td>S14011</td>
+<td>553.456916267101</td>
+</tr>
+<tr>
+<td>S14034</td>
+<td>544.903735545357</td>
+</tr>
+<tr>
+<td>S13001</td>
+<td>543.536561170484</td>
+</tr>
+<tr>
+<td>S13015</td>
+<td>543.409938366921</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 </div>
@@ -11198,16 +12295,61 @@ a.anchor-link {
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [51]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+
+<span class="k">SELECT</span>
+<span class="w">    </span><span class="n">PERCENTILE_CONT</span><span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">25</span><span class="p">)</span><span class="w"> </span><span class="n">WITHIN</span><span class="w"> </span><span class="k">GROUP</span><span class="p">(</span><span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">amount</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">amount_25per</span><span class="p">,</span>
+<span class="w">    </span><span class="n">PERCENTILE_CONT</span><span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">50</span><span class="p">)</span><span class="w"> </span><span class="n">WITHIN</span><span class="w"> </span><span class="k">GROUP</span><span class="p">(</span><span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">amount</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">amount_50per</span><span class="p">,</span>
+<span class="w">    </span><span class="n">PERCENTILE_CONT</span><span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">75</span><span class="p">)</span><span class="w"> </span><span class="n">WITHIN</span><span class="w"> </span><span class="k">GROUP</span><span class="p">(</span><span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">amount</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">amount_75per</span><span class="p">,</span>
+<span class="w">    </span><span class="n">PERCENTILE_CONT</span><span class="p">(</span><span class="mi">1</span><span class="p">.</span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="n">WITHIN</span><span class="w"> </span><span class="k">GROUP</span><span class="p">(</span><span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">amount</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">amount_100per</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">receipt</span>
+<span class="p">;</span>
 </pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>*  postgresql://padawan:***@db:5432/dsdojo_db
+1 rows affected.
+</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[51]:</div>
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
+<table>
+<thead>
+<tr>
+<th>amount_25per</th>
+<th>amount_50per</th>
+<th>amount_75per</th>
+<th>amount_100per</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>102.0</td>
+<td>170.0</td>
+<td>288.0</td>
+<td>10925.0</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 </div>
@@ -11226,16 +12368,104 @@ a.anchor-link {
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [54]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+<span class="k">SELECT</span>
+<span class="w">    </span><span class="n">store_cd</span><span class="p">,</span>
+<span class="w">    </span><span class="k">AVG</span><span class="p">(</span><span class="n">amount</span><span class="p">)</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">receipt</span>
+<span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">store_cd</span>
+<span class="k">HAVING</span><span class="w"> </span><span class="k">AVG</span><span class="p">(</span><span class="n">amount</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">330</span>
+<span class="p">;</span>
 </pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>*  postgresql://padawan:***@db:5432/dsdojo_db
+13 rows affected.
+</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[54]:</div>
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
+<table>
+<thead>
+<tr>
+<th>store_cd</th>
+<th>avg</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>S13052</td>
+<td>402.8674698795180723</td>
+</tr>
+<tr>
+<td>S13019</td>
+<td>330.2086158755484643</td>
+</tr>
+<tr>
+<td>S13003</td>
+<td>350.9155188246097337</td>
+</tr>
+<tr>
+<td>S14045</td>
+<td>330.0820734341252700</td>
+</tr>
+<tr>
+<td>S13004</td>
+<td>330.9439490445859873</td>
+</tr>
+<tr>
+<td>S13001</td>
+<td>348.4703862660944206</td>
+</tr>
+<tr>
+<td>S14026</td>
+<td>332.3405884723901653</td>
+</tr>
+<tr>
+<td>S14010</td>
+<td>348.7912621359223301</td>
+</tr>
+<tr>
+<td>S13015</td>
+<td>351.1119604316546763</td>
+</tr>
+<tr>
+<td>S12013</td>
+<td>330.1941299790356394</td>
+</tr>
+<tr>
+<td>S14047</td>
+<td>330.0770731707317073</td>
+</tr>
+<tr>
+<td>S14011</td>
+<td>335.7183333333333333</td>
+</tr>
+<tr>
+<td>S13020</td>
+<td>337.8799321170980059</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 </div>
